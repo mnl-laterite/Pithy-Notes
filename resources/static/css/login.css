@@ -1,0 +1,65 @@
+body {
+  background: #4287f5;
+  font-family: "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.title-text {
+  font-family: "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: white;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+}
+
+.form input {
+  font-family: "Helvetica", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form .notification {
+  font-family: "Helvetica", sans-serif;
+  outline: 0;
+  background: #f2333c;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: white;
+}
+
+.form .submit-input {
+  background: #4287f5;
+  cursor: pointer;
+  color: white;
+}
+
+.form .submit-input:hover {
+  background: #212ddb;
+}
+
+.registration {
+  margin: 15px 0 0;
+  text-align: center;
+  color: white;
+}

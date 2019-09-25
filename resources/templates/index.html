@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Pithy Notes</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+</head>
+<body>
+<div class="notes-bar" id="notes-bar">
+    <div id="username" class="username">{{ current_user.get_id() }}'s notes</div>
+    <div class="logout-container"><button id="logout" class="logout" type="button">Logout</button></div>
+    <div class="search-container">
+        <div class="search">
+            <input type="text" class="to-search" id="to-search" placeholder="Search notes...">
+            <button type="submit" class="search-button" id="search-button">Submit</button>
+        </div>
+    </div>
+    <div class="new-container"><button id="newnote" class="newnote" type="button">New Note</button></div>
+    <div class="notes-container" id="notes-container">
+        <!--This will be filled by a function from notes.js-->
+    </div>
+</div>
+<div class="editor-container" id="editor-container">
+    <div id="toolbar">
+        <div class="save-note">
+            <button type="button" id="save-note-button">Save Note</button>
+            <input type="text" id="tentative-title" placeholder="New title...">
+        </div>
+    </div>
+    <div id="editor">
+        <!-- Contents to be filled by ace.js -->
+    </div>
+</div>
+<script src="/static/lib/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/chrome");
+    editor.setFontSize("16px");
+    editor.session.setMode("ace/mode/markdown");
+    editor.session.setUseWrapMode(true);
+</script>
+<script src="/static/scripts/notes.js"></script>
+</body>
+</html>

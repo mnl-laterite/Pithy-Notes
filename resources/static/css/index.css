@@ -1,0 +1,220 @@
+body {
+  background: #4287f5;
+  font-family: "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4287f5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #212ddb;
+}
+
+.username {
+  color: #4287f5;
+  font-size: 24px;
+}
+
+#editor {
+  height: calc(100% - 100px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+ }
+
+ #toolbar {
+   height: 100px;
+ }
+
+#save-note-button {
+  background: #ffffff;
+  color: #4287f5;
+  font-size: 16px;
+  text-align: center;
+  border-style: solid;
+  border-color: #ffffff;
+  padding: 12px 22px;
+}
+
+#save-note-button:hover {
+  background: #ff4249;
+  border-color: #ff4249;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#tentative-title {
+  width: 80%;
+  font-size: 16px;
+  padding: 12px 22px;
+}
+
+.save-note {
+  height: 100%;
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.notes-bar {
+  height: 100%;
+  width: 30%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.editor-container {
+  height: 100%;
+  width: 70%;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.notes-bar .username {
+  text-align: center;
+}
+
+.notes-bar .logout-container {
+  text-align: center;
+}
+
+.notes-bar .new-container {
+  text-align: center;
+}
+
+.notes-bar .logout {
+  background: #4287f5;
+  width: 80%;
+  border: none;
+  margin-top: 10px;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.notes-bar .newnote {
+  background: #4287f5;
+  width: 80%;
+  border: none;
+  margin-top: 10px;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.notes-bar .logout:hover {
+  background: #212ddb;
+}
+
+.notes-bar .newnote:hover {
+  background: #212ddb;
+}
+
+.notes-bar .search-container {
+  width: 80%;
+  position: relative;
+  margin-top: 10px;
+  margin-left: 10%;
+}
+
+.search-container .search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.search .to-search {
+  width: 100%;
+  border: 3px solid #4287f5;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.to-search:focus {
+  color: #00B4CC;
+}
+
+.search-button {
+  border: 1px solid #4287f5;
+  background: #4287f5;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-button:hover {
+  background: #212ddb;
+}
+
+.notes-container {
+  color: #4287f5;
+  margin-top: 10%;
+  padding-top: 10px;
+  border-style: solid;
+  border-color: #4287f5;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+}
+
+.notes-container .note {
+  background: #ffffff;
+  border-style: solid;
+  border-color: #4287f5;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  height: 20%;
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+
+.note .note-title {
+  color: #ff4249;
+}
+
+.note .date {
+  color: #c4b0af;
+}
+
+.note .delete-button {
+  background: #ff4249;
+  color: #ffffff;
+  border-style: solid;
+  border-color: #ff4249;
+}
+
+.note .delete-button:hover {
+  cursor: pointer;
+}

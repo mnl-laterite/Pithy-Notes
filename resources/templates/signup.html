@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Pithy Notes</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
+</head>
+<body>
+<div class="title-text">
+    <h1>Pithy Notes</h1>
+</div>
+<div class="form">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="/signup">
+        <input type="text" name="Username" placeholder="Username" onfocus="this.value='';"/>
+        <input type="password" name="Password" placeholder="Password" onfocus="this.value='';"/>
+        <input type="password" name="PasswordRepeat" placeholder="Repeat Password" onfocus="this.value='';"/>
+        <input type="submit" value="Sign Up" class="submit-input"/>
+    </form>
+</div>
+<div class="login">Already have an account? <a href="/login">Click here</a></div>
+</body>
+</html>
