@@ -69,14 +69,31 @@ class Note(Resource):
 
     @login_required
     def get(self, note_id):
+        """Retrieve the note with the given id from the database."""
         result = notes.find_one({"_id": ObjectId(note_id)})
         return Response(json_util.dumps(result), mimetype='application/json')
 
     @login_required
     def post(self, note_id):
+        """Save the note with the given id to the database. If the id is null, create a new note instead."""
         data = request.get_json()
         title = data["Title"]
         contents = data["Contents"]
+
+        if note_id == "null":
+            # create new note and save it
+            time_from_epoch = int(round(time.time() * 1000))
+            note = {
+                "Owner": current_user.get_id(),
+                "Title": title,
+                "Time": time_from_epoch,
+                "Contents": contents
+            }
+
+            notes.insert_one(note)
+            users.update({"Username": current_user.get_id()}, {"$push": {"Notes": note}})
+
+            return Response(json_util.dumps(note), mimetype='application/json')
 
         if title != "":
             users.update({"Username": current_user.get_id(), "Notes": {"$elemMatch": {"_id": ObjectId(note_id)}}},
@@ -89,5 +106,6 @@ class Note(Resource):
 
     @login_required
     def delete(self, note_id):
+        """ Delete the note with the given id from the database. """
         notes.delete_one({"_id": ObjectId(note_id)})
         users.update({"Username": current_user.get_id()}, {"$pull": {"Notes": {"_id": ObjectId(note_id)}}})

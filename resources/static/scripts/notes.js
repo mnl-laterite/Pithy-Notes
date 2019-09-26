@@ -46,12 +46,13 @@ function newNote() {
 
 function saveNote() {
 
-    if (selectedNoteId) {
-        let title = document.getElementById('tentative-title').value;
-        let contents = editor.getValue();
-        let responseJSON = {"Title": title, "Contents": contents};
+    let title = document.getElementById('tentative-title').value;
+    let contents = editor.getValue();
+    let responseJSON = {"Title": title, "Contents": contents};
+    let request = new XMLHttpRequest();
 
-        let request = new XMLHttpRequest();
+    if (selectedNoteId) {
+        
         request.open('POST', '/notes/'.concat(selectedNoteId), true);
         request.setRequestHeader("Content-Type", "application/json");
 
@@ -65,7 +66,26 @@ function saveNote() {
         };
 
         request.send(JSON.stringify(responseJSON));
-    } 
+
+    } else {
+
+        request.open('POST', '/notes/null', true);
+        request.setRequestHeader("Content-Type", "application/json");
+
+        request.onload = function() {
+
+            let data = JSON.parse(this.responseText);
+            if (request.status == 200) {
+                renderData(data);
+                selectedNoteId = data._id['$oid'];
+                document.getElementById(selectedNoteId).style.background = "#d9fc9f";            
+            }
+
+        };
+
+        request.send(JSON.stringify(responseJSON));
+
+    }
 }
 
 function searchButtonClicked() {
@@ -140,6 +160,7 @@ function deleteButtonClicked(event) {
 
         let elementToDelete = document.getElementById(noteId);
         notesContainer.removeChild(elementToDelete);
+        selectedNoteId = null;
 
     };
 
