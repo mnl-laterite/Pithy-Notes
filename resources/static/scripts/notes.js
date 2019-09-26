@@ -16,7 +16,15 @@ logoutButton.addEventListener('click', event => {
 });
 
 let newNoteButton = document.getElementById('newnote');
-newNoteButton.addEventListener('click', event => {
+newNoteButton.addEventListener('click', newNote);
+
+let saveNoteButton = document.getElementById('save-note-button');
+saveNoteButton.addEventListener('click', saveNote);
+
+let searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', searchButtonClicked);
+
+function newNote() {
 
     let request = new XMLHttpRequest();
     request.open('POST', '/notes', true);
@@ -24,17 +32,16 @@ newNoteButton.addEventListener('click', event => {
 
         let data = JSON.parse(this.responseText);
         if (request.status == 200) {
-            renderData(data);
+            renderData(data);            
         }
 
     };
 
     request.send();
-    
-});
 
-let saveNoteButton = document.getElementById('save-note-button');
-saveNoteButton.addEventListener('click', event => {
+}
+
+function saveNote() {
 
     if (selectedNoteId) {
         let title = document.getElementById('tentative-title').value;
@@ -48,7 +55,6 @@ saveNoteButton.addEventListener('click', event => {
         request.onload = function() {
             
             if (title) {
-                console.log("Are we here?")
                 let toEdit = document.getElementById(selectedNoteId).getElementsByClassName('note-title')[0];
                 toEdit.textContent = title;
             }
@@ -56,12 +62,13 @@ saveNoteButton.addEventListener('click', event => {
         };
 
         request.send(JSON.stringify(responseJSON));
+    } else {
+
+        // create new note and then save the contents 
+
     }
 
-});
-
-let searchButton = document.getElementById('search-button');
-searchButton.addEventListener('click', searchButtonClicked);
+}
 
 function searchButtonClicked() {
 
@@ -86,7 +93,6 @@ function searchButtonClicked() {
     request.send(JSON.stringify(searchJSON));
 
 }
-
 
 function noteClicked(event) {
 

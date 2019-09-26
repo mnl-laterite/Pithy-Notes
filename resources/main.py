@@ -24,7 +24,7 @@ class Notes(Resource):
 
     @login_required
     def get(self):
-        """ Get all notes by current user or the notes that match the search string."""
+        """ Get all notes by current user."""
         result = users.find_one({"Username": current_user.get_id()}, {"Notes.Contents": 0})["Notes"]
         return Response(json_util.dumps(result), mimetype='application/json')
 
