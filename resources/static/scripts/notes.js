@@ -24,6 +24,9 @@ saveNoteButton.addEventListener('click', saveNote);
 let searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', searchButtonClicked);
 
+let searchField = document.getElementById('to-search');
+searchField.addEventListener('keyup', searchInitiated);
+
 function newNote() {
 
     let request = new XMLHttpRequest();
@@ -62,12 +65,7 @@ function saveNote() {
         };
 
         request.send(JSON.stringify(responseJSON));
-    } else {
-
-        // create new note and then save the contents 
-
-    }
-
+    } 
 }
 
 function searchButtonClicked() {
@@ -92,6 +90,13 @@ function searchButtonClicked() {
 
     request.send(JSON.stringify(searchJSON));
 
+}
+
+function searchInitiated(event) {
+
+    if (event.key === "Enter") {
+        searchButtonClicked();
+    }
 }
 
 function noteClicked(event) {

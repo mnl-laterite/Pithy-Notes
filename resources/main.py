@@ -46,6 +46,7 @@ class Notes(Resource):
 
     @login_required
     def put(self):
+        """ Search for the notes matching the search string. """
         data = request.get_json()
         search_string = None
         if data:
@@ -56,9 +57,10 @@ class Notes(Resource):
                                 [{"Owner": current_user.get_id(),
                                   "Title": {"$regex": search_string, "$options": "i"}},
                                  {"Owner": current_user.get_id(),
-                                  "Contents": {"$regex": search_string, "$options": "i"}}]})
+                                  "Contents": {"$regex": search_string, "$options": "i"}}]},
+                                {"Contents": 0})
         else:
-            result = notes.find({"Owner": current_user.get_id()})
+            result = notes.find({"Owner": current_user.get_id()}, {"Contents": 0})
 
         return Response(json_util.dumps(result), mimetype='application/json')
 
