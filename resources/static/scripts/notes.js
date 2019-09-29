@@ -161,6 +161,8 @@ function deleteButtonClicked(event) {
         let elementToDelete = document.getElementById(noteId);
         notesContainer.removeChild(elementToDelete);
         selectedNoteId = null;
+        editor.setValue("\n\n");
+        document.getElementById('tentative-title').value = "";
 
     };
 
