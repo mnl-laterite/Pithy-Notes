@@ -52,7 +52,7 @@ function saveNote() {
     let request = new XMLHttpRequest();
     let saveNoteId = selectedNoteId;
 
-    if (savedNoteId) {
+    if (saveNoteId) {
         
         request.open('POST', '/notes/'.concat(saveNoteId), true);
         request.setRequestHeader("Content-Type", "application/json");
