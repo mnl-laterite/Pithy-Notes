@@ -50,7 +50,7 @@ function saveNote() {
     let contents = editor.getValue();
     let responseJSON = {"Title": title, "Contents": contents};
     let request = new XMLHttpRequest();
-    saveNoteId = selectedNoteId;
+    let saveNoteId = selectedNoteId;
 
     if (savedNoteId) {
         
