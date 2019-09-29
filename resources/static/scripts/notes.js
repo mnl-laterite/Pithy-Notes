@@ -50,16 +50,17 @@ function saveNote() {
     let contents = editor.getValue();
     let responseJSON = {"Title": title, "Contents": contents};
     let request = new XMLHttpRequest();
+    saveNoteId = selectedNoteId;
 
-    if (selectedNoteId) {
+    if (savedNoteId) {
         
-        request.open('POST', '/notes/'.concat(selectedNoteId), true);
+        request.open('POST', '/notes/'.concat(saveNoteId), true);
         request.setRequestHeader("Content-Type", "application/json");
 
         request.onload = function() {
             
             if (title) {
-                let toEdit = document.getElementById(selectedNoteId).getElementsByClassName('note-title')[0];
+                let toEdit = document.getElementById(saveNoteId).getElementsByClassName('note-title')[0];
                 toEdit.textContent = title;
             }
 
