@@ -16,6 +16,7 @@ A pithy note taking app using Flask, Flask-RESTful, and MongoDB (pymongo) for th
 
 ### Deploy on Heroku
 - [clone the repository](https://help.github.com/en/articles/cloning-a-repository)
+- follow the local deployment instructions to get your ace editor files and include those in the repository (by removing `lib` from the .gitignore file)
 - Optional: create a new git branch for deployment on heroku using `git checkout -b new_branch_name`
 - in the `app.py` file modify the secret key (lines 9 and 10) so that it has a fixed value (otherwise you might get session conflicts depending on how many workers Heroku assigns to your app): instead of generating a key with `os.urandom(16)` every time the script is run, use `os.urandom(<bits of choice>)` externaly (in IDLE, for example) and copy the result for your key, or alternatively assign it a strong secret key by hand
 - create a [mongoDB ATLAS](https://www.mongodb.com/cloud/atlas) account and then create a sandbox (free) database cluster on that account using their [instructions](https://docs.atlas.mongodb.com/getting-started/)
