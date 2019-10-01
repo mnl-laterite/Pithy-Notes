@@ -23,6 +23,7 @@ def load_user(username):
     return User(u['Username'])
 
 
+# set-up the routes
 api.add_resource(Home, '/', '/home', '/index')
 api.add_resource(Register, '/signup')
 api.add_resource(Login, '/login')
