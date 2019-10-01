@@ -1,11 +1,16 @@
+/**
+ * Div element that will contain the notes.
+ */
 const notesContainer = document.getElementById('notes-container');
-const editorContainer = document.getElementById('editor-container');
+/**
+ * Constant that records which note is currently selected.
+ */
 var selectedNoteId;
-
 
 let logoutButton = document.getElementById('logout');
 logoutButton.addEventListener('click', event => {
 
+    // create a POST request to '/logout' when the button has been clicked
     let request = new XMLHttpRequest();
     request.open('POST', '/logout', true);
     request.onload = function () {
@@ -27,6 +32,10 @@ searchButton.addEventListener('click', searchButtonClicked);
 let searchField = document.getElementById('to-search');
 searchField.addEventListener('keyup', searchInitiated);
 
+/**
+ * Make a POST request to '/notes' when the 'New Note' butten is clicked 
+ * and render the new note if the request was successfully handled.
+ */
 function newNote() {
 
     let request = new XMLHttpRequest();
@@ -41,9 +50,13 @@ function newNote() {
     };
 
     request.send();
-
 }
 
+/**
+ * If a note is selected, make a POST request to '/notes/<note_id>' when the 'Save Note' button is clicked.
+ * Otherwise, make a POST request to '/notes/null' to create a new note with the current values of the editor 
+ * and title field.
+ */
 function saveNote() {
 
     let title = document.getElementById('tentative-title').value;
@@ -60,6 +73,7 @@ function saveNote() {
         request.onload = function() {
             
             if (title) {
+                // edit the note title in the page to reflect the changes
                 let toEdit = document.getElementById(saveNoteId).getElementsByClassName('note-title')[0];
                 toEdit.textContent = title;
             }
@@ -77,6 +91,7 @@ function saveNote() {
 
             let data = JSON.parse(this.responseText);
             if (request.status == 200) {
+                // render the new note in the page and mark it as the currently selected one
                 renderData(data);
                 selectedNoteId = data._id['$oid'];
                 document.getElementById(selectedNoteId).style.background = "#d9fc9f";            
@@ -85,10 +100,13 @@ function saveNote() {
         };
 
         request.send(JSON.stringify(responseJSON));
-
     }
 }
 
+/**
+ * Make a PUT request to '/notes' with the search string the user has inputted.
+ * Render the result in the page.
+ */
 function searchButtonClicked() {
 
     let searchString = document.getElementById('to-search').value;
@@ -110,9 +128,12 @@ function searchButtonClicked() {
     };
 
     request.send(JSON.stringify(searchJSON));
-
 }
 
+/**
+ * Double searchNoteClicked when the user presses the 'Enter' key in the seach note field.
+ * @param {keyup} event 
+ */
 function searchInitiated(event) {
 
     if (event.key === "Enter") {
@@ -120,17 +141,24 @@ function searchInitiated(event) {
     }
 }
 
+/**
+ * Mark the clicked on note as the currently selected one and display its contents in the editor by making a 
+ * GET request to '/notes/<note_id>' to retrieve the note contents.
+ * @param {click} event 
+ */
 function noteClicked(event) {
 
     let previouslySelectedNoteId = selectedNoteId;
     selectedNoteId = event.currentTarget.id;
 
     if (previouslySelectedNoteId) {
+        // a note was previously selected, so mark it as unselected before marking a new one as selected
         let exSelection = document.getElementById(previouslySelectedNoteId);
         if (exSelection) {
             exSelection.style.background = "#ffffff";
         }
     }
+    // mark the clicked on note as the currently selected one
     document.getElementById(selectedNoteId).style.background = "#d9fc9f";
     
     let request = new XMLHttpRequest();
@@ -151,6 +179,11 @@ function noteClicked(event) {
     request.send();
 }
 
+/**
+ * Make a DELETE request to '/notes/<note_id>' to delete the currently selected/clicked on note
+ * from the database, then clean the page of the elements associated with it.
+ * @param {click} event 
+ */
 function deleteButtonClicked(event) {
 
     let noteId = event.currentTarget.id;
@@ -168,9 +201,12 @@ function deleteButtonClicked(event) {
     };
 
     request.send();
-
 }
 
+/**
+ * Render the note data in the page. 
+ * @param {JSON} data 
+ */
 function renderData(data) {
 
     const id = data._id['$oid'];
@@ -208,6 +244,10 @@ function renderData(data) {
     
 }
 
+/**
+ * Make a GET request to '/notes' to retrieve all the notes the user has made and render the results
+ * in the page. 
+ */
 function getNotes() {
 
     let request = new XMLHttpRequest();
